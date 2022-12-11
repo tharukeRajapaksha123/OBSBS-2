@@ -67,6 +67,12 @@ if (isset($_POST["submit"])) {
          if ($insert) {
             setcookie("email", $email);
             setcookie("is_owner", $owner_value);
+            if ($owner_value == 1) {
+               header("Location: shop_owner_dashboard.php");
+            } else {
+               header("Location: home.php");
+            }
+
             $status = 'success';
             $statusMsg = "File uploaded successfully.";
          } else {

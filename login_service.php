@@ -19,19 +19,23 @@ $sql = "SELECT * FROM users WHERE email = '$email'";
 
 $result = $conn->query($sql);
 
-if($result->num_rows > 0){
+if ($result->num_rows > 0) {
    while ($row = $result->fetch_assoc()) {
-      if($password === $row["password"]){
+      if ($password === $row["password"]) {
          setcookie("email", $email);
          setcookie("is_owner", $row["is_owner"]);
-         header("Location: home.php");
+         if ($row["is_owner"] == 1) {
+            header("Location: shop_owner_dashboard.php");
+         } else {
+            header("Location: home.php");
+         }
          return;
       }
    }
 
    echo ("login failed please try again");
 
-}else{
+} else {
    echo ("Login failed please try again");
 }
 

@@ -28,7 +28,6 @@
       <a href="home.php">home</a>
       <a href="about.php">about</a>
       <a href="salons.php">salons</a>
-      <a href="book.php">book</a>
    </nav>
 
    <div id="menu-btn" class="fas fa-bars"></div>
