@@ -78,7 +78,7 @@ $query = $conn->query($sql);
                <?php echo ($row["price"]) ?>
             </td>
             <td>
-               <?php echo ($row["image"]) ?>
+               <img style="width: 80px;height :80px"  src=<?php echo ($row["image"]) ?> alt="service":/>
             </td>
 
             <td style="display: flex;">
