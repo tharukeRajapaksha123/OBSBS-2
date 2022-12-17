@@ -19,24 +19,34 @@ $sql = "SELECT * FROM users WHERE email = '$email'";
 
 $result = $conn->query($sql);
 
+
+$confirm_dialog = "
+   <script>
+      if (confirm('Login Failed')) {
+               window.location.href = '../login_page.php'
+      }
+   </script>
+";
+
+
 if ($result->num_rows > 0) {
    while ($row = $result->fetch_assoc()) {
-      if ($password === $row["password"]) {
+      if ($password === $row["PASSWORD"]) {
          setcookie("email", $email);
          setcookie("is_owner", $row["is_owner"]);
          if ($row["is_owner"] == 1) {
-            header("Location: shop_owner_dashboard.php");
+            header("Location: ../shop_owner_dashboard.php");
          } else {
-            header("Location: home.php");
+            header("Location: ../home.php");
          }
          return;
       }
    }
 
-   echo ("login failed please try again");
+   echo ($confirm_dialog);
 
 } else {
-   echo ("Login failed please try again");
+   echo ($confirm_dialog);
 }
 
 

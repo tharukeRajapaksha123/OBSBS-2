@@ -18,7 +18,7 @@
          <li><a href="#" onclick="loadHtml('template','bookings.php')">Bookings</a></li>
          <li><a href="#" onclick="loadHtml('template','my_services.php')">Services</a></li>
          <li><a href="#" onclick="loadHtml('template','profile.php')">Profile</a></li>
-         <li><a href="#" onclick="loadHtml('template','shop_detils.php')">Shop Details</a></li>
+         <li><a href="#" onclick="loadHtml('template','shop_details.php')">Shop Details</a></li>
       </ul>
    </div>
    <div id="template" class="template">
