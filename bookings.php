@@ -6,8 +6,6 @@ $db_name = "salon_db";
 // Create connection
 $conn = new mysqli($servername, $username, $password, $db_name);
 
-
-
 // Check connection
 if ($conn->connect_error) {
    die("Connection failed: " . $conn->connect_error);
@@ -45,7 +43,7 @@ $query = $conn->query($sql);
 </head>
 
 <body>
-   <table id="customers">
+   <table id="customers" style="">
       <tr>
          <th>ID</th>
          <th>Service Name</th>

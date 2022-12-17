@@ -22,12 +22,13 @@
       </ul>
    </div>
    <div id="template" class="template">
-      fdsafsf
+
    </div>
 
 
 
    <script>
+
       function loadHtml(id, fileName) {
          console.log(`div id ${id}, fileName ${fileName}`);
          let xhttp;
@@ -51,6 +52,32 @@
             return;
          }
       }
+
+      function getSearchParameters() {
+         var prmstr = window.location.search.substr(1);
+         return prmstr != null && prmstr != "" ? transformToAssocArray(prmstr) : {};
+      }
+
+      function transformToAssocArray(prmstr) {
+         var params = {};
+         var prmarr = prmstr.split("&");
+         for (var i = 0; i < prmarr.length; i++) {
+            var tmparr = prmarr[i].split("=");
+            params[tmparr[0]] = tmparr[1];
+         }
+         return params;
+      }
+
+      var params = getSearchParameters();
+      for (var data in params) {
+         if (params[data].includes("update")) {
+            loadHtml("template", "profile.php")
+            break;
+         } else {
+            loadHtml("template", "bookings.php")
+         }
+      }
+
    </script>
 
 </body>

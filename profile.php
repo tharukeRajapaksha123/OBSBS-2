@@ -45,19 +45,22 @@ if ($query->num_rows > 0) {
 </head>
 
 <body>
-   <h1>User Profile</h1>
-   <form method="POST" action="update_profile.php">
-      Name : <input type="text" name="name" value="<?php echo($user_name) ?>"><br>
-      Email  : <input type="text" name="email" value="<?php echo($user_email) ?>"><br>
-      Contact Number <input type="text" name="contact_number" value="<?php echo($user_contact_number) ?>"><br>
-      Address <input type="text" name="address" value="<?php echo($user_address) ?>"><br>
-      <input type="submit" value="Update Profile">
-   </form>
-   <?php 
-      if($_COOKIE["is_owner"] == 1){
-         echo ("<a href='register_shop.php'>Register My Salon </a>");
-      }
+   <div>
+      <h1>User Profile</h1>
+      <form method="POST" action="./services/update_profile.php">
+         Name : <input type="text" name="name" value="<?php echo ($user_name) ?>"><br>
+         Email : <input type="text" name="email" value="<?php echo ($user_email) ?>"><br>
+         Contact Number <input type="text" name="contact_number" value="<?php echo ($user_contact_number) ?>"><br>
+         Address <input type="text" name="address" value="<?php echo ($user_address) ?>"><br>
+         <input type="submit" value="Update Profile">
+      </form>
+      <?php
+   if ($_COOKIE["is_owner"] == 1) {
+      echo ("<a href='register_shop.php'>Register My Salon </a>");
+   }
    ?>
+
+   </div>
 </body>
 
 </html>

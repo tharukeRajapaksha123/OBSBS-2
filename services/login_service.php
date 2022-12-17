@@ -32,10 +32,11 @@ $confirm_dialog = "
 if ($result->num_rows > 0) {
    while ($row = $result->fetch_assoc()) {
       if ($password === $row["PASSWORD"]) {
-         setcookie("email", $email);
-         setcookie("is_owner", $row["is_owner"]);
+         setcookie("email", $email, time()+3600*24*30, '/');
+         setcookie("is_owner", $row["is_owner"], time()+3600*24*30, '/');
+      
          if ($row["is_owner"] == 1) {
-            header("Location: ../shop_owner_dashboard.php");
+          header("Location: ../shop_owner_dashboard.php");
          } else {
             header("Location: ../home.php");
          }
