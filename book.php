@@ -133,24 +133,25 @@ if ($query->num_rows > 0) {
    <!-- booking section starts  -->
 
    <section class="booking">
-      <form action="book_form.php" method="post" class="book-form">
+      <form action="./services/book_form.php" method="post" class="book-form">
          <div class="flex">
             <div class="inputBox">
                <span>name :</span>
-               <input required value="<?php echo ($user_name) ?>" type="text" placeholder="enter your name" name="customer_name">
+               <input  value="<?php echo ($user_name) ?>" type="text" placeholder="enter your name"
+                  name="customer_name" required>
             </div>
             <div class="inputBox">
                <span>email :</span>
-               <input value="<?php echo ($user_email) ?>" type="email" placeholder="enter your email" name="email">
+               <input value="<?php echo ($user_email) ?>" type="email" placeholder="enter your email" name="email" required>
             </div>
             <div class="inputBox">
                <span>phone :</span>
                <input value="<?php echo ($user_contact_number) ?>" type="number" placeholder="enter your number"
-                  name="phone">
+                  name="phone" required>
             </div>
             <div class="inputBox">
                <span>address :</span>
-               <input value="<?php echo ($user_address) ?>" type="text" placeholder="enter your address" name="address">
+               <input value="<?php echo ($user_address) ?>" type="text" placeholder="enter your address" name="address" required>
             </div>
             <div class="inputBox">
                <span>Salon :</span>
@@ -159,16 +160,112 @@ if ($query->num_rows > 0) {
             </div>
             <div class="inputBox">
                <span>how many :</span>
-               <input type="number" placeholder="number of guests" name="guests">
+               <input  type="number" placeholder="number of guests" name="guests" required>
             </div>
             <div class="inputBox">
-               <span>Service :</span>
-               <input disabled value="<?php echo ($service_name) ?>" type="text" name="servsice_name">
+               <span>Date :</span>
+               <input type="date" name="booked_date" id="date-picker" value=<?php
+               if (isset($_COOKIE['selected_date'])) {
+                  echo ($_COOKIE['selected_date']);
+               } else {
+                  echo ("");
+               }       ?>
+               >
             </div>
             <div class="inputBox">
-               <span>arrivals :</span>
-               <input type="date" name="booked_date">
+               <span></span>
+
             </div>
+            <div class="inputBox">
+               <?php
+               if (isset($_COOKIE['selected_date'])) {
+                  echo ("<span>Time</span>");
+                  $time_zones =
+                     array(
+                        "08:00:am",
+                        "09:00:am",
+                        "10:00:am",
+                        "11:00:am",
+                        "12:00:pm",
+                        "13:00:pm",
+                        "14:00:pm",
+                        "15:00:pm",
+                        "16:00:pm",
+                        "17:00:pm",
+                        "18:00:pm",
+                        "19:00:pm",
+                        "20:00:pm",
+                        "21:00:pm",
+                        "22:00:pm",
+                     );
+
+                  $selected_date = $_COOKIE['selected_date'];
+                  $sql = " SELECT * FROM booking WHERE booked_to = $id AND booked_date = '$selected_date'";
+                  $query = $conn->query($sql);
+                  $booked_times = array();
+                  if ($query->num_rows > 0) {
+                     $count = 0;
+                     while ($raw = $query->fetch_assoc()) {
+                        $time = $raw["booked_time"];
+                        $booked_times[$count] = $time;
+                        $count++;
+                     }
+                     foreach ($time_zones as $time) {
+                        if (in_array($time, $booked_times, TRUE)) {
+                           // echo ("<p> $time </p>");
+                        } else {
+                           echo (
+                              "<input type='radio' id='$time' name='selected_time' value='$time' required>
+                              <label for='$time'>$time</label>
+                              <br>");
+                        }
+                     }
+                  } else {
+                     foreach ($time_zones as $time) {
+                        echo (
+                           "<input type='radio' id='$time' name='selected_time' value='$time' required>
+                              <label for='$time'>$time</label>
+                              <br>");
+                     }
+                  }
+
+               }
+               ?>
+            </div>
+            <div class="inputBox">
+               <span></span>
+
+            </div>
+            <!-- <div class="inputBox">
+               <span>Service Type :</span>
+               <?php
+               $sql = "SELECT * FROM service WHERE shop_id = $id";
+               $result = $conn->query($sql);
+               if ($result->num_rows > 0) {
+                  $count = 0;
+                  while ($raw = $result->fetch_assoc()) { ?>
+
+
+               <div class="checkbox-row">
+                  <span>
+                     <?php echo ($raw["name"]) ?>
+                  </span>
+
+                  <input type="checkbox" id=<?php echo ("service$count"); ?>
+                  name=
+                  <?php echo ("service[]"); ?>
+                  value=
+                  <?php echo ($raw['_id']) ?>
+                  >
+
+               </div>
+
+               <?php
+                     $count++;
+                  }
+               }
+               ?>
+            </div> -->
          </div>
          <div style="display: none;">
             <input type="text" name="shop_id" value="<?php echo ($id) ?>">
@@ -176,6 +273,7 @@ if ($query->num_rows > 0) {
             <input type="number" name="total_cost" value="<?php echo ($service_cost) ?>">
             <input type="number" name="contact_number_shop" value="<?php echo ($shop_contact_number) ?>">
             <input type="text" name="service_name" value="<?php echo ($service_name) ?>">
+
          </div>
          <input type="submit" value="submit" class="btn" name="send">
 
@@ -184,22 +282,6 @@ if ($query->num_rows > 0) {
    </section>
 
    <!-- booking section ends -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
    <!-- footer section starts  -->
 
@@ -259,7 +341,16 @@ if ($query->num_rows > 0) {
 
    <!-- custom js file link  -->
    <script src="js/script.js"></script>
+   <script>
 
+      let available_times = []
+      document.getElementById("date-picker").addEventListener("input", (event) => {
+         const date = event.target.value;
+         document.cookie = `selected_date=${date}`;
+         location.reload()
+      })
+
+   </script>
 </body>
 
 </html>
