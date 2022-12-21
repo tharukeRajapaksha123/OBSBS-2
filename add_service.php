@@ -44,18 +44,23 @@ if ($query->num_rows > 0) {
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="./css/create_service.css">
    <title>Create Service</title>
 </head>
 
 <body>
-   <h1>Create Service</h1>
-   <form action="add_service_service.php" method="post">
-      <input name="id" value=<?php echo ($shop_id) ?> style= "display:none">
-      Name : <input name="name" required> <br>
-      Image Link : <input name="image" requiredplaceholder="Paste your service image link here"><br>
-      Price : <input name="price" required><br>
-      <input type="submit" value="Create Service">
-   </form>
+   <div class="body">
+      <h1>Create Service</h1>
+      <div class="glass-card">
+         <form action="./services/add_service_service.php" method="post">
+            <input name="id" value=<?php echo ($shop_id) ?> style= "display:none">
+            Name : <input name="name" required> <br>
+            Image Link : <input name="image" requiredplaceholder="Paste your service image link here"><br>
+            Price : <input name="price" required><br>
+            <input id="btn" type="submit" value="Create Service">
+         </form>
+      </div>
+   </div>
 
 </body>
 

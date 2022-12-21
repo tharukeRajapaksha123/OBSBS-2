@@ -33,7 +33,7 @@ $sql = "
 $result = $conn->query($sql);
 
 if ($result) {
-   header("Location: shop_owner_dashboard.php");
+   header("Location: ../shop_owner_dashboard.php");
 } else {
    echo ("Error " . $conn->error);
 }

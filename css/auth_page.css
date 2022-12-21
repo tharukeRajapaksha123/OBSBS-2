@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600&display=swap');
 #login-body{
    width: 100vw;
-   height: 100vh;
+
    background-color: black;
    display: flex;
    padding: 0px;
@@ -28,9 +28,9 @@ img{
 input{
    border: none;
    padding: 0 8px;
-   height: 40px;
+   height: 35px;
    border-radius: 6px;
-   background-color: rgba(0, 0, 0, 1);
+   background-color: rgba(255, 255, 255,0.1);
    fill: none;
    width: 400px;
    color: white;
@@ -39,4 +39,8 @@ input{
 #log{
    background-color: #34bdeb;
    width: 250px;
+}
+
+#owner{
+   height: 15px;
 }

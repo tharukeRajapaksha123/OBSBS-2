@@ -1,6 +1,6 @@
 <?php 
    if($_COOKIE["email"] == null){
-   header("Location: login_page.php");
+      header("Location: login_page.php");
    }
 
 ?>
