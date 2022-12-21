@@ -21,7 +21,7 @@
    padding: 16px;
 }
 
-input{
+input,textarea{
    border: none;
    border-radius: 12px;
    padding: 0 16px;

@@ -63,6 +63,7 @@ if (isset($_POST["submit"])) {
          if ($insert) {
             $status = 'success';
             $statusMsg = "File uploaded successfully.";
+            header("Location: ./shop_owner_dashboard.php");
          } else {
             $statusMsg = "File upload failed  please try again.";
             echo ($conn->error);

@@ -59,14 +59,11 @@ if ($query->num_rows > 0) {
          Address <input type="text" name="address" value=""><br>
          <input type="submit" value="Update Profile">
       </form>
-      <?php
-      if ($_COOKIE["is_owner"] == 1) {
-         echo ("<a href='register_shop.php'>Register My Salon </a>");
-      }
-      ?>
-
    </div> -->
+   <!-- Button trigger modal -->
+
    <section style="background-color: #eee;">
+ 
       <div class="container py-5">
 
          <div class="row">
